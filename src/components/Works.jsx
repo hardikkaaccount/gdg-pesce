@@ -3,7 +3,9 @@ import { Tilt } from "react-tilt";
 import { motion } from "framer-motion";
 import { SectionWrapper } from "../hoc";
 import { fadeIn, textVariant } from "../utils/motion";
-import { Events } from "../constants"; 
+import { Events } from "../constants";  // Ensure this is correctly importing from constants
+
+// Event card component
 const EventCard = ({ date, eventType, title, details, link, location, image, isUpcoming }) => {
   return (
     <Tilt
@@ -12,7 +14,7 @@ const EventCard = ({ date, eventType, title, details, link, location, image, isU
         scale: 1,
         speed: 450,
       }}
-      className="bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full"
+      className="bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full relative"
     >
       <div className="relative w-full h-[230px]">
         <img
@@ -20,6 +22,13 @@ const EventCard = ({ date, eventType, title, details, link, location, image, isU
           alt={title}
           className="w-full h-full object-cover rounded-2xl"
         />
+        
+        {/* "Past Event" label for past events */}
+        {!isUpcoming && (
+          <div className="absolute top-4 left-4 sm:top-6 sm:left-6 bg-teal-500 text-white text-xs sm:text-sm font-semibold p-2 sm:p-3 rounded-md z-10 max-w-max">
+            Past Event
+          </div>
+        )}
       </div>
 
       <div className="mt-5">
@@ -56,15 +65,13 @@ const EventCard = ({ date, eventType, title, details, link, location, image, isU
   );
 };
 
+// Main component for displaying events
 const EventsSection = () => {
   return (
     <section id="events" className="bg-dark p-8">
-      <motion.div
-        variants={textVariant()}
-        className="text-center mb-12"
-      >
+      <motion.div variants={textVariant()} className="text-center mb-12">
         <p className="text-lg font-medium text-gray-500">GDG PESCE</p>
-        <h2 className="text-4xl font-extrabold text-transparent bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text">
+        <h2 className="text-3xl font-extrabold text-transparent bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text">
           Past Events
         </h2>
       </motion.div>
