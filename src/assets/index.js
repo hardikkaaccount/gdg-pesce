@@ -4,7 +4,7 @@ import success from "./success.png";
 import insurance from "./insurance.png";
 import networking from "./networking.png";
 import code1 from "./code1.png";
-import hardik from "./pes.gif";
+import hardik from "./pes.jpg";
 import close from "./close.svg";
 import logo from "./LOGO2.png";
 import menu from "./menu.svg";
