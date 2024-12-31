@@ -64,7 +64,7 @@ const Footer = () => {
       {/* Typewriter Animation */}
       <div className="w-full h-auto flex justify-center text-purple-500 font-bold self-start text-2xl mt-5">
         <Typewriter
-          text={["Thank's for visiting!", "Download my resume!", "<Love to Code/>"]}
+          text={["Thank's for visiting!", "GDG on Campus PESCE"]}
           loop
           speed={100}
           cursor={false}
