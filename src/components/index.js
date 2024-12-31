@@ -28,5 +28,5 @@ export {
   Footer,
   TicofabCanvas,
   Team,
-  NavigationBar
+  NavigationBar,
 };
