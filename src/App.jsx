@@ -5,7 +5,7 @@ import Community from './pages/Community';
 import Team from './pages/Team';
 import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
-import Chatbot from './pages/chatbot';
+import Chatbot from './Chatbot';
 
 const App = () => {
   return (
