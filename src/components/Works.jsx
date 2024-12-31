@@ -6,6 +6,9 @@ import { fadeIn, textVariant } from "../utils/motion";
 import { Events } from "../constants";  // Ensure this is correctly importing from constants
 
 // Event card component
+=======
+import { Events } from "../constants"; 
+>>>>>>> 7d189cebcb60e19c387de1d2704411b384beb261
 const EventCard = ({ date, eventType, title, details, link, location, image, isUpcoming }) => {
   return (
     <Tilt
