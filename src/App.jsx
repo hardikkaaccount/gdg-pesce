@@ -6,12 +6,13 @@ import Team from './pages/Team';
 import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
 import Chatbot from './Chatbot';
+import Navbar from './components/Navbar'; // Example Navbar
 
 const App = () => {
   return (
     <Router>
-      <div className="pt-20"> {/* Add padding to account for fixed Navbar */}
-        {/* Your Navbar and other components */}
+      <Navbar />
+      <div className="pt-20"> {/* Adjust padding for fixed Navbar */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/community" element={<Community />} />
@@ -19,9 +20,7 @@ const App = () => {
           <Route path="/about" element={<AboutUs />} />
           <Route path="/contact" element={<ContactUs />} />
         </Routes>
-
-        {/* Add the Chatbot component */}
-        <Chatbot />
+        <Chatbot /> {/* Chatbot embedded across all routes */}
       </div>
     </Router>
   );
