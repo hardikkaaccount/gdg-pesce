@@ -70,6 +70,18 @@
   background: linear-gradient(90.13deg, #00cea8 1.9%, #bf61ff 97.5%);
   background: -webkit-linear-gradient(-90.13deg, #00cea8 1.9%, #bf61ff 97.5%);
 }
+/* Add this to your global CSS or in a styled component */
+.hero {
+  position: relative; /* Ensure it's positioned relative or adjusted accordingly */
+  z-index: 10; /* Adjust the z-index of the hero section if necessary */
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  z-index: 20; /* Ensure the navbar is above the hero section */
+}
+
 
 .orange-text-gradient {
   background: #f12711; /* fallback for old browsers */

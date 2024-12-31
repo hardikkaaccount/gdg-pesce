@@ -3,6 +3,9 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial, Preload } from "@react-three/drei";
 import * as random from "maath/random/dist/maath-random.esm";
 
+// Define the colors matching GDG branding
+const colors = ['#f44336', '#ffeb3b', '#4caf50', '#2196f3']; // Red, Yellow, Green, Blue
+
 const Stars = (props) => {
   const ref = useRef();
   const [sphere] = useState(() => random.inSphere(new Float32Array(5000), { radius: 1.2 }));
@@ -17,10 +20,11 @@ const Stars = (props) => {
       <Points ref={ref} positions={sphere} stride={3} frustumCulled {...props}>
         <PointMaterial
           transparent
-          color='#f272c8'
-          size={0.002}
+          color={colors[Math.floor(Math.random() * colors.length)]} // Random color from GDG palette
+          size={0.005}
           sizeAttenuation={true}
           depthWrite={false}
+          opacity={0.9} // Reduced opacity by 0.1
         />
       </Points>
     </group>

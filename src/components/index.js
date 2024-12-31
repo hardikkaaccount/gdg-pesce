@@ -2,23 +2,24 @@ import { EarthCanvas, BallCanvas, ComputersCanvas, StarsCanvas, TicofabCanvas } 
 import Hero from "./Hero";
 import Navbar from "./Navbar";
 import About from "./About";
-import Tech from "./Tech";
-import Experience from "./Experience";
+import Experience from "./UpcomingEvents";
 import Works from "./Works";
-import Feedbacks from "./Feedbacks";
+import Feedbacks from "./Highlights";
 import Contact from "./Contact";
 import CanvasLoader from "./Loader";
 import Footer from "./Footer";
-
+import Team from "./team";
+import Communitya from './communitya';
+import NavigationBar from './NavigationBar';
 export {
   Hero,
   Navbar,
   About,
-  Tech,
   Experience,
   Works,
   Feedbacks,
   Contact,
+  Communitya,
   CanvasLoader,
   EarthCanvas,
   BallCanvas,
@@ -26,4 +27,6 @@ export {
   StarsCanvas,
   Footer,
   TicofabCanvas,
+  Team,
+  NavigationBar
 };

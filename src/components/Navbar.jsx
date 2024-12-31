@@ -1,24 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-
-import { styles } from "../styles";
-import { navLinks } from "../constants";
-import { logo, menu, close } from "../assets";
-import resume from "/src/jeff_jiang.pdf";
+import { Link, useLocation } from "react-router-dom";
 import { LOGO2 } from "../assets";
+
 const Navbar = () => {
-  const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);  // Dependency on `location` means it will run on route change
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      if (scrollTop > 100) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(scrollTop > 100);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -26,119 +25,93 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const navLinks = [
+    { id: "home", title: "Home", path: "/" },
+    { id: "community", title: "Community", path: "/community" },
+    { id: "team", title: "Team", path: "/team" },
+    { id: "about", title: "About Us", path: "/about" },
+    { id: "contact", title: "Contact Us", path: "/contact" },
+  ];
+
   return (
-    <nav
-      className={`${
-        styles.paddingX
-      } w-full flex items-center py-5 fixed top-0 z-20 ${
-        scrolled ? "backdrop-blur-sm" : "bg-transparent"
-      }`}
-    >
-      <div className='w-full flex justify-between items-center max-w-7xl mx-auto'>
-        <Link
-          to='/'
-          className='flex items-center'
-          onClick={() => {
-            setActive("");
-            window.scrollTo(0, 0);
-          }}
-        >
-          <img src={LOGO2} alt='logo' className='w-24 h-24 object-contain' />
-          <p className='text-white text-[18px] font-bold cursor-pointer flex'>
-            FullStack Developer &nbsp;
-            {/* <span className='sm:block hidden'> | Portfolio</span> */}
-          </p>
-        </Link>
-
-        <ul className="list-none hidden sm:flex flex-row items-center gap-10">
-        <a href={resume} download="jeff_jiang.pdf">
-            <button
-              className={`${
-                active === Link.title ? "abhishek" : "abhishek-btn"
-              }   font-medium cursor-pointer border-[1px]`}
-              onClick={() => setActive(Link.title)}
-            >
-              <span className="flex items-center animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text text-transparent font-black">
-                {" "}
-                <svg
-                  class="fill-current w-4 h-4 mr-2"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
-                </svg>{" "}
-                Download CV
-              </span>
-
-            </button>
-          </a>
-          {navLinks.map((nav) => (
-            <li
-              key={nav.id}
-              className={`${
-                active === nav.title ? "text-white" : "text-secondary"
-              } hover:text-white text-[18px] font-medium cursor-pointer`}
-              onClick={() => setActive(nav.title)}
-            >
-              <a href={`#${nav.id}`}>{nav.title}</a>
-            </li>
-          ))}
-        </ul>
-
-        <div className='sm:hidden flex flex-1 justify-end items-center'>
-          <img
-            src={toggle ? close : menu}
-            alt='menu'
-            className='w-[28px] h-[28px] object-contain'
-            onClick={() => setToggle(!toggle)}
-          />
-
-          <div
-            className={`${
-              !toggle ? "hidden" : "flex"
-            } p-6 black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}
+    <div>
+      {/* Navbar */}
+      <nav
+        className={`${
+          scrolled ? "backdrop-blur-sm" : "bg-transparent"
+        } w-full flex items-center py-5 fixed top-0 z-20 transition-all duration-300 ease-in-out`}
+      >
+        <div className="w-full flex justify-between items-center max-w-7xl mx-auto px-4">
+          {/* Logo */}
+          <Link
+            to="/"
+            className="flex items-center"
+            onClick={() => window.scrollTo(0, 0)}  // Ensure scrolling to top when clicking logo
           >
-            <ul className='list-none flex justify-end items-start flex-1 flex-col gap-4'>
-            <a href={resume} download="jeff_jiang.pdf">
-            <button
-              className={`${
-                active === Link.title ? "abhishek" : "abhishek-btn"
-              }   font-medium cursor-pointer border-[1px]`}
-              onClick={() => setActive(Link.title)}
-            >
-              <span className="flex items-center animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text text-transparent font-black">
-                {" "}
-                <svg
-                  class="fill-current w-4 h-4 mr-2"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
-                </svg>{" "}
-                Download CV
-              </span>
+            <img src={LOGO2} alt="logo" className="h-12 object-contain" />
+            <p className="text-white text-[24px] font-bold cursor-pointer ml-3">
+              GDG on Campus PESCE
+            </p>
+          </Link>
 
-            </button>
-          </a>
-              {navLinks.map((nav) => (
-                <li
-                  key={nav.id}
-                  className={`font-poppins font-medium cursor-pointer text-[16px] ${
-                    active === nav.title ? "text-white" : "text-secondary"
-                  }`}
-                  onClick={() => {
-                    setToggle(!toggle);
-                    setActive(nav.title);
-                  }}
-                >
-                  <a href={`#${nav.id}`}>{nav.title}</a>
-                </li>
-              ))}
-            </ul>
+          {/* Desktop Navigation */}
+          <ul className="list-none hidden sm:flex flex-row items-center gap-10">
+            {navLinks.map((nav) => (
+              <li
+                key={nav.id}
+                className={`${
+                  currentPath === nav.path ? "text-white" : "text-secondary"
+                } hover:text-white text-[18px] font-medium cursor-pointer transition-all duration-300 ease-in-out`}
+              >
+                <Link to={nav.path}>{nav.title}</Link>
+              </li>
+            ))}
+          </ul>
+
+          {/* Mobile Navigation (Hamburger Menu) */}
+          <div className="sm:hidden flex flex-1 justify-end items-center">
+            {/* Hamburger Icon (3 lines) */}
+            <div onClick={() => setToggle(!toggle)} className="flex flex-col justify-center items-center space-y-2 cursor-pointer">
+              <div
+                className={`w-6 h-1 bg-white transition-all duration-300 ${toggle ? 'rotate-45 translate-y-2' : ''}`}
+              ></div>
+              <div
+                className={`w-6 h-1 bg-white transition-all duration-300 ${toggle ? 'opacity-0' : ''}`}
+              ></div>
+              <div
+                className={`w-6 h-1 bg-white transition-all duration-300 ${toggle ? '-rotate-45 -translate-y-2' : ''}`}
+              ></div>
+            </div>
+
+            {/* Mobile Dropdown Menu with a darker background */}
+            <div
+              className={`${
+                !toggle ? "hidden" : "block"
+              } p-6 bg-black bg-opacity-95 absolute top-[80px] right-0 mx-4 my-2 min-w-[140px] z-50 rounded-xl transition-all duration-300 ease-in-out`} 
+            >
+              <ul className="list-none flex flex-col gap-4">
+                {navLinks.map((nav) => (
+                  <li
+                    key={nav.id}
+                    className={`${
+                      currentPath === nav.path ? "text-white" : "text-secondary"
+                    } text-[16px] font-medium cursor-pointer transition-all duration-300 ease-in-out`}
+                    onClick={() => setToggle(false)}
+                  >
+                    <Link to={nav.path}>{nav.title}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
+      </nav>
+
+      {/* Hero Section */}
+      <div className={`hero ${toggle ? "mt-[250px]" : ""}`}>
+        {/* Hero content goes here */}
       </div>
-    </nav>
+    </div>
   );
 };
 
